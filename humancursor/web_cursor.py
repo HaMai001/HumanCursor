@@ -183,6 +183,7 @@ class WebCursor:
                 dot.style.height = "5px";
                 dot.style.borderRadius = "50%";
                 dot.style.backgroundColor = "red";
+                dot.style.pointerEvents = "none";
                 // Add the dot to the page
                 document.body.appendChild(dot);
               }
