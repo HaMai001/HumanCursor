@@ -1,10 +1,9 @@
 import random
 import numpy as np
 
-from selenium.common.exceptions import MoveTargetOutOfBoundsException, StaleElementReferenceException
+from selenium.common.exceptions import MoveTargetOutOfBoundsException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver import Firefox
-from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 from humancursor.utilities.human_curve_generator import HumanizeMouseTrajectory
@@ -87,22 +86,8 @@ class WebAdjuster:
         arr_offset = np.diff(points, axis=0)
         for x_offset, y_offset in arr_offset:
             self.__action.move_by_offset(x_offset, y_offset)
-        
         try:
             self.__action.perform()
-            
-            if not isinstance(element_or_pos, list):
-                x, y = map(int, points[-1])
-                is_moved_to_element = self.__driver.execute_script("""
-                    const elem = arguments[0];
-                    const elementAtPoint = document.elementFromPoint(arguments[1], arguments[2]);
-                    return elem === elementAtPoint || elem.contains(elementAtPoint);
-                """, element_or_pos, x, y)
-                destination_current = self.__driver.execute_script(script, element_or_pos)
-                if (not is_moved_to_element) and (destination_current != destination):
-                    raise StaleElementReferenceException('The element is has been moved')
-        except StaleElementReferenceException:
-            return self.move_to(element_or_pos, origin_coordinates, absolute_offset, relative_position, human_curve, steady)
         except MoveTargetOutOfBoundsException:
             self.__action.move_to_element(element_or_pos).perform()
             print(
