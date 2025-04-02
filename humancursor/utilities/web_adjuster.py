@@ -103,8 +103,8 @@ class WebAdjuster:
         body = self.__driver.find_element(By.TAG_NAME, 'body')
         size = body.size
         if random_point:
-            random_x = size['width'] * random.randint(10, 90) // 100
-            random_y = size['height'] * random.randint(10, 90) // 100
+            random_x = (size['width'] * random.randint(10, 90)) // 100
+            random_y = (size['height'] * random.randint(10, 90)) // 100
             self.__action.move_to_element_with_offset(body, random_x-size['width']//2, random_y-size['height']//2).perform()
             self.origin_coordinate = [random_x, random_y]
         else:
