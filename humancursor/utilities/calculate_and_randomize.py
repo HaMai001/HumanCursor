@@ -61,9 +61,9 @@ def generate_random_curve_parameters(driver, pre_origin, post_destination):
         [0.15, 0.36, 0.17, 0.12, 0.08, 0.04, 0.03, 0.02, 0.015, 0.005],
     )[0]
 
-    distortion_mean = random.choice(range(80, 110)) / 100
-    distortion_st_dev = random.choice(range(85, 110)) / 100
-    distortion_frequency = random.choice(range(25, 70)) / 100
+    distortion_mean = random.randint(80, 110) / 100
+    distortion_st_dev = random.randint(85, 110) / 100
+    distortion_frequency = random.randint(25, 70) / 100
 
     if web:
         target_points = random.choice(
