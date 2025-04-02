@@ -168,30 +168,32 @@ class WebCursor:
 
     def show_cursor(self):
         self.__driver.execute_script('''
-        let dot;
+        let dot = document.querySelector("#SELENIUM_MOUSE");
+        if (!dot) {
+            // Create a new div element for the red dot if it doesn't exist
+            dot = document.createElement("div");
+            dot.id = "SELENIUM_MOUSE";
+            // Style the dot with CSS
+            dot.style.position = "fixed";
+            dot.style.width = "5px";
+            dot.style.height = "5px";
+            dot.style.borderRadius = "50%";
+            dot.style.backgroundColor = "red";
+            dot.style.pointerEvents = "none";
+            dot.style.zIndex = "999999";
+            // Add the dot to the page
+            document.body.appendChild(dot);
+
             function displayRedDot() {
-              // Get the cursor position
-              const x = event.clientX;
-              const y = event.clientY;
-
-              if (!dot) {
-                // Create a new div element for the red dot if it doesn't exist
-                dot = document.createElement("div");
-                // Style the dot with CSS
-                dot.style.position = "fixed";
-                dot.style.width = "5px";
-                dot.style.height = "5px";
-                dot.style.borderRadius = "50%";
-                dot.style.backgroundColor = "red";
-                dot.style.pointerEvents = "none";
-                // Add the dot to the page
-                document.body.appendChild(dot);
-              }
-
-              // Update the dot's position
-              dot.style.left = x + "px";
-              dot.style.top = y + "px";
+            // Get the cursor position
+            const x = event.clientX-2;
+            const y = event.clientY-2;
+            
+            // Update the dot's position
+            dot.style.left = x + "px";
+            dot.style.top = y + "px";
             }
-
+            
             // Add event listener to update the dot's position on mousemove
-            document.addEventListener("mousemove", displayRedDot);''')
+            document.addEventListener("mousemove", displayRedDot);
+        }''')

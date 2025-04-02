@@ -12,8 +12,8 @@ class HumanizeMouseTrajectory:
 
     def generate_curve(self, **kwargs):
         """Generates the curve based on arguments below, default values below are automatically modified to cause randomness"""
-        offset_boundary_x = kwargs.get("offset_boundary_x", 80)
-        offset_boundary_y = kwargs.get("offset_boundary_y", 80)
+        offset_boundary_x = kwargs.get("offset_boundary_x") or random.randint(10,100)
+        offset_boundary_y = kwargs.get("offset_boundary_y") or random.randint(10,100)
         left_boundary = (
             kwargs.get("left_boundary", min(self.from_point[0], self.to_point[0]))
             - offset_boundary_x
