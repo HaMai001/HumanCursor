@@ -26,8 +26,8 @@ def generate_random_curve_parameters(driver, pre_origin, post_destination):
     # min_width, max_width = viewport_width * 0.15, viewport_width * 0.85
     # min_height, max_height = viewport_height * 0.15, viewport_height * 0.85
     
-    min_width, max_width = viewport_width + 1, viewport_width - 1
-    min_height, max_height = viewport_height + 1, viewport_height - 1
+    min_width, max_width = 1, viewport_width - 1
+    min_height, max_height = 1, viewport_height - 1
 
     tween_options = [
         pytweening.easeOutExpo,
