@@ -26,8 +26,7 @@ class WebAdjuster:
         steady=False
     ):
         """Moves the cursor, trying to mimic human behaviour!"""
-        origin = origin_coordinates or self.origin_coordinate
-        self._refetch_mouse(origin, random_point=(self.origin_coordinate == [0, 0]))
+        origin = self._refetch_mouse(origin_coordinates or self.origin_coordinate, random_point=(self.origin_coordinate == [0, 0]))
 
         pre_origin = tuple(origin)
         if isinstance(element_or_pos, list):
@@ -111,4 +110,5 @@ class WebAdjuster:
             x, y = origin_coordinate
             self.__action.move_to_element_with_offset(body, x-size['width']//2, y-size['height']//2).perform()
             self.origin_coordinate = [x, y]
+        return self.origin_coordinate
             
