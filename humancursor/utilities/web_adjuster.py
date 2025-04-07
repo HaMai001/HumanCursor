@@ -100,15 +100,15 @@ class WebAdjuster:
     def _refetch_mouse(self, origin_coordinate, random_point:bool = False):
         """Update mouse positon"""
         body = self.__driver.find_element(By.TAG_NAME, 'body')
-        size = body.size
+        width, height = self.__driver.execute_script("return [document.documentElement.clientWidth, document.documentElement.clientHeight];")
         if random_point:
-            random_x = (size['width'] * random.randint(10, 90)) // 100
-            random_y = (size['height'] * random.randint(10, 90)) // 100
-            self.__action.move_to_element_with_offset(body, random_x-size['width']//2, random_y-size['height']//2).perform()
+            random_x = (width * random.randint(10, 90)) // 100
+            random_y = (height * random.randint(10, 90)) // 100
+            self.__action.move_to_element_with_offset(body, random_x-width//2, random_y-height//2).perform()
             self.origin_coordinate = [random_x, random_y]
         else:
             x, y = origin_coordinate
-            self.__action.move_to_element_with_offset(body, x-size['width']//2, y-size['height']//2).perform()
+            self.__action.move_to_element_with_offset(body, x-width//2, y-height//2).perform()
             self.origin_coordinate = [x, y]
         return self.origin_coordinate
             
