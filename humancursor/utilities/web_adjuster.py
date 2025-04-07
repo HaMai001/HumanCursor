@@ -104,11 +104,11 @@ class WebAdjuster:
         if random_point:
             random_x = (width * random.randint(10, 90)) // 100
             random_y = (height * random.randint(10, 90)) // 100
-            self.__action.move_to_element_with_offset(body, random_x-width//2, random_y-height//2).perform()
+            self.__action.move_to_element_with_offset(body, random_x-(width//2), random_y-(height//2)).perform()
             self.origin_coordinate = [random_x, random_y]
         else:
             x, y = origin_coordinate
-            self.__action.move_to_element_with_offset(body, x-width//2, y-height//2).perform()
+            self.__action.move_to_element_with_offset(body, x-(width//2), y-(height//2)).perform()
             self.origin_coordinate = [x, y]
         return self.origin_coordinate
             
