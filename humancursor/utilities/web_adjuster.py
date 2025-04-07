@@ -26,7 +26,7 @@ class WebAdjuster:
         steady=False
     ):
         """Moves the cursor, trying to mimic human behaviour!"""
-        origin = self._refetch_mouse(origin_coordinates or self.origin_coordinate, random_point=(self.origin_coordinate == [0, 0]))
+        origin = self.refetch_mouse(origin_coordinates or self.origin_coordinate, random_point=(self.origin_coordinate == [0, 0]))
 
         pre_origin = tuple(origin)
         if isinstance(element_or_pos, list):
@@ -97,7 +97,7 @@ class WebAdjuster:
         self.origin_coordinate = last_mouse_location
         return last_mouse_location
     
-    def _refetch_mouse(self, origin_coordinate, random_point:bool = False):
+    def refetch_mouse(self, origin_coordinate, random_point:bool = False):
         """Update mouse positon"""
         body = self.__driver.find_element(By.TAG_NAME, 'body')
         width, height = self.__driver.execute_script("return [document.documentElement.clientWidth, document.documentElement.clientHeight];")
